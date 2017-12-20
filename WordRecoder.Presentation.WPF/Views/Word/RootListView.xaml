@@ -1,0 +1,111 @@
+﻿<UserControl x:Class="WordRecoder.Presentation.WPF.Views.Word.RootListView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:WordRecoder.Presentation.WPF.Views.Word"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:cal="http://www.caliburnproject.org"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+    <Grid>
+        <ListBox ItemsSource="{Binding Items}">
+            <ListBox.ItemContainerStyle>
+                <Style TargetType="ListBoxItem">
+                    <Setter Property="Margin" Value="20"></Setter>
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate>
+                                <Grid>
+                                    <Grid.Resources>
+                                        <Style TargetType="TextBlock" x:Key="Header" >
+                                            <Setter Property="FontSize" Value="15"></Setter>
+                                            <Setter Property="FontWeight" Value="Bold"></Setter>
+                                            <Setter Property="VerticalAlignment" Value="Top"></Setter>
+                                        </Style>
+                                        <Style TargetType="TextBlock" x:Key="Content">
+                                            <Setter Property="FontSize" Value="15"></Setter>
+                                            <Setter Property="VerticalAlignment" Value="Top"></Setter>
+                                        </Style>
+
+                                    </Grid.Resources>
+                                    <materialDesign:Card Width="200" Height="200">
+                                        <Grid>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="auto"/>
+                                                <RowDefinition Height="auto"/>
+                                                <RowDefinition Height="auto"/>
+                                                <RowDefinition Height="auto"/>
+                                                <RowDefinition/>
+                                            </Grid.RowDefinitions>
+
+                                            <StackPanel Orientation="Horizontal" Margin="5">
+                                                <TextBlock Text="词根:" Style="{StaticResource Header}"/>
+                                                <TextBlock Margin="5,0" Text="{Binding Name}"  Style="{StaticResource Content}"/>
+                                            </StackPanel>
+
+                                            <StackPanel Orientation="Horizontal" Grid.Row="1" Margin="5">
+                                                <TextBlock Text="变形:" Style="{StaticResource Header}"/>
+                                                <ItemsControl ItemsSource="{Binding Derivative}">
+                                                    <ItemsControl.ItemTemplate>
+                                                        <DataTemplate>
+                                                            <TextBlock Style="{StaticResource Content}" Text="{Binding Name}" Margin="5,0"></TextBlock>
+                                                        </DataTemplate>
+                                                    </ItemsControl.ItemTemplate>
+                                                    <ItemsControl.ItemsPanel>
+                                                        <ItemsPanelTemplate>
+                                                            <WrapPanel Orientation="Horizontal"></WrapPanel>
+                                                        </ItemsPanelTemplate>
+                                                    </ItemsControl.ItemsPanel>
+                                                </ItemsControl>
+                                                <StackPanel.Style>
+                                                    <Style TargetType="StackPanel">
+                                                        <Style.Triggers>
+                                                            <DataTrigger Binding="{Binding Derivative.Count}" Value="0">
+                                                                <Setter Property="Visibility" Value="Collapsed"/>
+                                                            </DataTrigger>
+                                                        </Style.Triggers>
+                                                    </Style>
+                                                </StackPanel.Style>
+                                            </StackPanel>
+
+                                            <StackPanel Orientation="Horizontal" Margin="5" Grid.Row="2">
+                                                <TextBlock Text="英文含义:" Style="{StaticResource Header}"/>
+                                                <TextBlock Margin="5,0" Text="{Binding Mean}" Style="{StaticResource Content}"/>
+                                            </StackPanel>
+
+                                            <StackPanel Orientation="Horizontal" Margin="5" Grid.Row="3">
+                                                <TextBlock Text="中文含义:" Style="{StaticResource Header}"/>
+                                                <TextBlock Margin="5,0" Text="{Binding ChineseMean}" Style="{StaticResource Content}"/>
+                                            </StackPanel>
+
+                                            <Grid  Margin="5" Grid.Row="4">
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="auto"/>
+                                                    <ColumnDefinition/>
+                                                </Grid.ColumnDefinitions>
+                                                <TextBlock Text="备注:" VerticalAlignment="Top" Style="{StaticResource Header}"/>
+                                                <TextBlock Margin="5,0" Text="{Binding Remark}" TextWrapping="Wrap" Grid.Column="1" Style="{StaticResource Content}"/>
+                                            </Grid>
+                                        </Grid>
+                                    </materialDesign:Card>
+
+
+                                    <Button	Grid.Row="0" Margin="0,-16,-16,0" HorizontalAlignment="Right"	VerticalAlignment="Top"
+                                                Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}" cal:Message.Attach="[Action Edit($this)]">
+                                        <materialDesign:PackIcon Kind="ShareVariant" />
+                                    </Button>
+                                </Grid>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </ListBox.ItemContainerStyle>
+            <ListBox.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapPanel Orientation="Horizontal"></WrapPanel>
+                </ItemsPanelTemplate>
+            </ListBox.ItemsPanel>
+        </ListBox>
+    </Grid>
+</UserControl>

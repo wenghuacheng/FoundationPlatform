@@ -1,0 +1,41 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:WordRecoder.Presentation.WPF.CustomerControls.AutoCompleteTextbox">
+
+    <Style TargetType="local:AutoCompleteTextbox">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="local:AutoCompleteTextbox">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition MaxHeight="200"/>
+                        </Grid.RowDefinitions>
+
+                        <TextBox x:Name="textBox" Text="{TemplateBinding Text}"/>
+
+                        <Popup x:Name="popup" Grid.Row="1" IsOpen="False" StaysOpen="False" AllowsTransparency="True" Width="{TemplateBinding Width}">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="auto"/>
+                                    <RowDefinition Height="*"/>
+                                </Grid.RowDefinitions>
+
+                                <ContentControl  HorizontalAlignment="Stretch" VerticalContentAlignment="Stretch" Template="{TemplateBinding HeaderTemplate}"/>
+
+                                <ListBox x:Name="listbox" Grid.Row="1" ItemsSource="{TemplateBinding DataSource}" ItemTemplate="{TemplateBinding ItemTemplate}" Background="White" Width="{TemplateBinding Width}"  HorizontalContentAlignment="Stretch">
+                                    <ListBox.ItemContainerStyle>
+                                        <Style TargetType="ListBoxItem">
+                                            <Setter Property="HorizontalAlignment" Value="Stretch"></Setter>
+                                            <Setter Property="IsSelected" Value="{Binding IsSelected,UpdateSourceTrigger=PropertyChanged}"></Setter>
+                                        </Style>
+                                    </ListBox.ItemContainerStyle>
+                                </ListBox>
+                            </Grid>
+                        </Popup>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+</ResourceDictionary>

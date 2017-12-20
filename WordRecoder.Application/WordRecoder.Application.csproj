@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="6.2.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\WordRecoder.Domain\WordRecoder.Domain.csproj" />
+    <ProjectReference Include="..\WordRecoder.Infrastructure\WordRecoder.Infrastructure.csproj" />
+  </ItemGroup>
+
+</Project>

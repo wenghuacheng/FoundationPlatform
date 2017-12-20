@@ -3,7 +3,43 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.26730.16
 MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WordRecoder.Presentation.WPF", "WordRecoder.Presentation.WPF\WordRecoder.Presentation.WPF.csproj", "{F5268309-5E13-4A67-B818-A5233B43AEB8}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WordRecoder.Infrastructure", "WordRecoder.Infrastructure\WordRecoder.Infrastructure.csproj", "{033F97D0-0FEE-4BE2-86D0-CFED5241A7EE}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WordRecoder.Application", "WordRecoder.Application\WordRecoder.Application.csproj", "{BD86268A-F307-4292-B191-A808714C3C8E}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WordRecoder.Domain", "WordRecoder.Domain\WordRecoder.Domain.csproj", "{EB4C1008-1B1E-4BBA-903F-6844A8E5D8C2}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Infrastructure", "Infrastructure\Infrastructure.csproj", "{4FE53EDD-3372-46CF-99F3-B46C5D91A32B}"
+EndProject
 Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F5268309-5E13-4A67-B818-A5233B43AEB8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F5268309-5E13-4A67-B818-A5233B43AEB8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F5268309-5E13-4A67-B818-A5233B43AEB8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F5268309-5E13-4A67-B818-A5233B43AEB8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{033F97D0-0FEE-4BE2-86D0-CFED5241A7EE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{033F97D0-0FEE-4BE2-86D0-CFED5241A7EE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{033F97D0-0FEE-4BE2-86D0-CFED5241A7EE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{033F97D0-0FEE-4BE2-86D0-CFED5241A7EE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BD86268A-F307-4292-B191-A808714C3C8E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BD86268A-F307-4292-B191-A808714C3C8E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BD86268A-F307-4292-B191-A808714C3C8E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BD86268A-F307-4292-B191-A808714C3C8E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EB4C1008-1B1E-4BBA-903F-6844A8E5D8C2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EB4C1008-1B1E-4BBA-903F-6844A8E5D8C2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EB4C1008-1B1E-4BBA-903F-6844A8E5D8C2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EB4C1008-1B1E-4BBA-903F-6844A8E5D8C2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4FE53EDD-3372-46CF-99F3-B46C5D91A32B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4FE53EDD-3372-46CF-99F3-B46C5D91A32B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4FE53EDD-3372-46CF-99F3-B46C5D91A32B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4FE53EDD-3372-46CF-99F3-B46C5D91A32B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
