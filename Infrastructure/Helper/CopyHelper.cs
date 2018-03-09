@@ -53,7 +53,7 @@ namespace Infrastructure.Helper
                 var itemIn = tInType.GetProperty(itemOut.Name); ;
                 if (itemIn != null)
                 {
-                    itemOut.SetValue(tOut, itemIn.GetValue(model);
+                    itemOut.SetValue(tOut, itemIn.GetValue(model));
                 }
             }
             return tOut;
