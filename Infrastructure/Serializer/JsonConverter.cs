@@ -1,13 +1,12 @@
 ﻿using Newtonsoft.Json;
 
-namespace Infrastructure.Converter
+namespace Infrastructure.Serializer
 {
     public class JsonConverter
     {
         public static string ToJson(object o)
         {
-            string json = JsonConvert.SerializeObject(o);
-            return json;
+            return JsonConvert.SerializeObject(o);
         }
 
         public static T ToObject<T>(string json) where T : class
