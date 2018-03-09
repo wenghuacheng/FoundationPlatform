@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26730.16
+VisualStudioVersion = 15.0.27130.2020
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WordRecoder.Presentation.WPF", "WordRecoder.Presentation.WPF\WordRecoder.Presentation.WPF.csproj", "{F5268309-5E13-4A67-B818-A5233B43AEB8}"
 EndProject
@@ -12,6 +12,8 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WordRecoder.Domain", "WordRecoder.Domain\WordRecoder.Domain.csproj", "{EB4C1008-1B1E-4BBA-903F-6844A8E5D8C2}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Infrastructure", "Infrastructure\Infrastructure.csproj", "{4FE53EDD-3372-46CF-99F3-B46C5D91A32B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infrastructure.Test", "Infrastructure.Test\Infrastructure.Test.csproj", "{D811F60E-B154-4173-B07C-1F831095631C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{4FE53EDD-3372-46CF-99F3-B46C5D91A32B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4FE53EDD-3372-46CF-99F3-B46C5D91A32B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4FE53EDD-3372-46CF-99F3-B46C5D91A32B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D811F60E-B154-4173-B07C-1F831095631C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D811F60E-B154-4173-B07C-1F831095631C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D811F60E-B154-4173-B07C-1F831095631C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D811F60E-B154-4173-B07C-1F831095631C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
