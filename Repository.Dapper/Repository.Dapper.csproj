@@ -6,6 +6,11 @@
 
   <ItemGroup>
     <PackageReference Include="Dapper" Version="1.50.4" />
+    <PackageReference Include="DapperExtensions.DotnetCore" Version="1.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Domain.Core\Domain.Core.csproj" />
   </ItemGroup>
 
 </Project>

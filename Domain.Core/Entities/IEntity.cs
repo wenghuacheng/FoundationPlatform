@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Repository.Dapper
+namespace Domain.Core
 {
     public interface IEntity<T> : IEntity
     {
