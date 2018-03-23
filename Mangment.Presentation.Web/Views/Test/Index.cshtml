@@ -1,0 +1,41 @@
+﻿<div>
+    <button id="btn1" type="button">测试</button>
+    <div id="content"></div>
+</div>
+
+@section Scripts{
+    <script src="~/lib/jquery/dist/jquery.min.js">
+      
+    </script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#btn1").click(function () {
+                //ajax
+                $.ajax(
+                    {
+                        type: 'post',
+                        url: "PostTest",
+                        dataType: 'json',
+                        success: function (data, stutas, xhr) {
+                            var jsonResult = JSON.stringify(data);
+                            alert(jsonResult);
+                            var obj = eval('(' + jsonResult + ')');
+                            //属性开头小写
+                            alert(obj.name + " " + obj.id + " " + obj.isMale);
+
+                        },
+                        error: function (xhr, textStatus, data) {
+                            alert(data);
+                        },
+                        complete: function (xhr, textStatus) {
+                            //alert(textStatus);
+                        }
+                    }
+                )
+          
+            });         
+        });
+    </script>
+}
+
+  

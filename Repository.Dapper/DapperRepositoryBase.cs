@@ -7,6 +7,7 @@ using DapperExtensions;
 using DapperExtensions.Sql;
 using System.Linq;
 using Domain.Core;
+using Domain.Core.IRespository;
 
 namespace Repository.Dapper
 {
