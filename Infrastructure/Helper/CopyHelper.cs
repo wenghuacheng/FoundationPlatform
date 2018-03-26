@@ -90,10 +90,10 @@ namespace Infrastructure.Helper
         /// <typeparam name="T"></typeparam>
         /// <param name="obj"></param>
         /// <returns></returns>
-        public static T JsonDeepCopy<T>(T obj) where T : class
-        {
-            return obj.ToJson().ToObject<T>();
-        }
+        //public static T JsonDeepCopy<T>(T obj) where T : class
+        //{
+        //    return obj.ToJson().ToObject<T>();
+        //}
         #endregion
     }
 }
