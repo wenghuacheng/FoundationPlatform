@@ -1,0 +1,1 @@
+2018-03-26 16:50:30.0008|INFO|NLogTest.Program|Info消息，应该打印到控制台中
