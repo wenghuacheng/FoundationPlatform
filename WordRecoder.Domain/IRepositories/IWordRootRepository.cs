@@ -1,10 +1,11 @@
-﻿using System;
+﻿using Domain.Core.IRespository;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace WordRecoder.Domain.IRepository
+namespace WordRecoder.Domain.IRepositories
 {
-    public interface IWordRootRepository
+    public interface IWordRootRepository : IRepository
     {
         /// <summary>
         /// 添加关联单词词根

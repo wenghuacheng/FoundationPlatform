@@ -1,19 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 using WordRecoder.Domain.Entities;
-using WordRecoder.Domain.IRepository;
 using Dapper;
-using System.Data;
-using WordRecoder.Domain;
 using System.Linq;
+using WordRecoder.Domain.IRepositories;
+using Repository.Dapper;
+using Domain.Core.IRepository;
 
 namespace WordRecoder.Infrastructure.Repository
 {
-    public class WordRepository : BaseRepository, IWordRepository
+    public class WordRepository : DapperRepositoryBase<Word, int>, IWordRepository
     {
         public WordRepository(IDbConnectionProvider connectionProvider)
-            : base(connectionProvider)
         {
         }
 
@@ -23,7 +20,7 @@ namespace WordRecoder.Infrastructure.Repository
             sql += "SELECT last_insert_id();";
             return this.Connection.Query<int>(sql, word).FirstOrDefault();
         }
-        
+
         public List<Word> QueryWord(int id, string name)
         {
             List<Word> result = new List<Word>();

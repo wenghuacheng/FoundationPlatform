@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Text;
-using WordRecoder.Domain.IRepository;
+﻿using Domain.Core.IRepository;
+using WordRecoder.Domain.IRepositories;
 using WordRecoder.Infrastructure.Repository;
 
 namespace WordRecoder.Infrastructure.Container

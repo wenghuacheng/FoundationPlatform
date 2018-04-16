@@ -2,22 +2,13 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using WordRecoder.Domain.ValueObjects;
 using Infrastructure.Extensions;
-using static WordRecoder.Presentation.WPF.CustomerControls.CustomerControls.MultiTextboxInput.MultiTextboxInput;
-using WordRecoder.Presentation.WPF.CustomerControls.CustomerControls.MultiTextboxInput;
-using WordRecoder.Application.IApplicationServices;
 using AutoMapper;
-using WordRecoder.Application.Dto;
 using WordRecoder.Infrastructure.Container;
-using WordRecoder.Domain.IRepository;
-using MaterialDesignThemes.Wpf;
-using System.Threading;
-using WordRecoder.Presentation.WPF.General;
-using WordRecoder.Presentation.WPF.General.Interfaces;
 using WordRecoder.Presentation.WPF.Models.DisplayModels;
+using WordRecoder.Application.IApplicationServices;
+using WordRecoder.Application.Dto;
 
 namespace WordRecoder.Presentation.WPF.ViewModels.Word
 {

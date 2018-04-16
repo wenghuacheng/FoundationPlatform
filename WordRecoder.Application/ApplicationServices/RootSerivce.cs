@@ -5,9 +5,9 @@ using System.Text;
 using WordRecoder.Application.Dto;
 using WordRecoder.Application.IApplicationServices;
 using WordRecoder.Domain.Entities;
-using WordRecoder.Domain.IRepository;
 using System.Linq;
 using System.Threading.Tasks;
+using WordRecoder.Domain.IRepositories;
 
 namespace WordRecoder.Application.ApplicationServices
 {
@@ -24,15 +24,15 @@ namespace WordRecoder.Application.ApplicationServices
         public async Task AddOrUpdateRoot(RootDto rootDto)
         {
             if (rootDto.Id <= 0)
-                mRootRepository.AddRoot(Mapper.Map<Root>(rootDto));
+                mRootRepository.Insert(Mapper.Map<Root>(rootDto));
             else
-                mRootRepository.UpdateRoot(Mapper.Map<Root>(rootDto));
+                mRootRepository.Update(Mapper.Map<Root>(rootDto));
         }
 
         public async Task<List<RootDto>> QueryRoot(RootDto searchModel)
         {
             List<RootDto> result = new List<RootDto>();
-            List<Root> roots = mRootRepository.QueryRoot(searchModel.Id, searchModel.Name);
+            List<Root> roots = mRootRepository.GetAll(p => p.Id == searchModel.Id && p.Name == searchModel.Name).ToList();
             result.AddRange(roots.Select(p => Mapper.Map<RootDto>(p)));
 
             return result;

@@ -6,6 +6,11 @@ using System.Threading.Tasks;
 
 namespace Domain.Core.IRespository
 {
+    public interface IRepository
+    {
+
+    }
+
     public interface IRepository<TEntity, TPrimaryKey> where TEntity : class, IEntity<TPrimaryKey>
     {
         #region Single

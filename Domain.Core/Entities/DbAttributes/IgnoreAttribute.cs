@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace WordRecoder.Domain.Entities.DbAttributes
+namespace Domain.Core.Entities.DbAttributes
 {
     public class IgnoreAttribute : DbAttribute
     {

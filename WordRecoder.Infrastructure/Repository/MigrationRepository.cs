@@ -1,10 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Text;
 using WordRecoder.Domain;
-using WordRecoder.Domain.IRepository;
 using Dapper;
+using Domain.Core.IRepository;
 
 namespace WordRecoder.Infrastructure.Repository
 {

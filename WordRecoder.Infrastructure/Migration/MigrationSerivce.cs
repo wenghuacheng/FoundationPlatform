@@ -1,11 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Reflection;
-using System.Text;
-using WordRecoder.Domain.IRepository;
 using System.Linq;
 using WordRecoder.Infrastructure.Repository;
 using System.Data;
+using Domain.Core.IRepository;
 
 namespace WordRecoder.Infrastructure.Migration
 {

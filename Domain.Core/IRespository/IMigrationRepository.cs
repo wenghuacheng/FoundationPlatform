@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace WordRecoder.Domain.IRepository
+namespace Domain.Core.IRepository
 {
     public interface IMigrationRepository
     {

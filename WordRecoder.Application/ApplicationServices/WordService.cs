@@ -1,12 +1,9 @@
-﻿using System;
+﻿using AutoMapper;
 using System.Collections.Generic;
-using System.Text;
 using WordRecoder.Application.Dto;
 using WordRecoder.Application.IApplicationServices;
-using WordRecoder.Domain.IRepository;
-using System.Linq;
-using AutoMapper;
 using WordRecoder.Domain.Entities;
+using WordRecoder.Domain.IRepositories;
 
 namespace WordRecoder.Application.ApplicationServices
 {
@@ -26,13 +23,13 @@ namespace WordRecoder.Application.ApplicationServices
             if (word.Id > 0)
             {
                 //update
-                mWordRepository.UpdateWord(Mapper.Map<Word>(word));
+                mWordRepository.Update(Mapper.Map<Word>(word));
                 HandleWordRootRelation(word.Id, word.RootRelations);
             }
             else
             {
                 //add
-                int id = mWordRepository.AddWord(Mapper.Map<Word>(word));
+                int id = mWordRepository.InsertAndGetId(Mapper.Map<Word>(word));
                 HandleWordRootRelation(id, word.RootRelations);
             }
         }

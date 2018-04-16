@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Domain.Core.IRepository;
 using System.Data;
-using System.Text;
-using WordRecoder.Domain.IRepository;
 
 namespace WordRecoder.Domain
 {

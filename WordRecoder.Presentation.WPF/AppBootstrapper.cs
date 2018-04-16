@@ -1,19 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using Caliburn.Micro;
 using WordRecoder.Presentation.WPF.ViewModels.Main;
-using System.ComponentModel.Composition;
-using System.ComponentModel.Composition.Hosting;
-using System.ComponentModel.Composition.Primitives;
 using WordRecoder.Infrastructure.Container;
-using WordRecoder.Domain.IRepository;
 using WordRecoder.Infrastructure.Migration;
 using AutoMapper;
 using WordRecoder.Presentation.WPF.General.Interfaces;
+using Domain.Core.IRepository;
 
 namespace WordRecoder.Presentation.WPF
 {

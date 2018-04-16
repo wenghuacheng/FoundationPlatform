@@ -1,18 +1,19 @@
-﻿using System;
+﻿using Domain.Core.IRespository;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using WordRecoder.Domain.Entities;
 using WordRecoder.Domain.ValueObjects;
 
-namespace WordRecoder.Domain.IRepository
+namespace WordRecoder.Domain.IRepositories
 {
-    public interface IWordRepository
+    public interface IWordRepository : IRepository<Word, int>
     {
-        int AddWord(Word word);
+        //int AddWord(Word word);
 
-        void UpdateWord(Word word);
+        //void UpdateWord(Word word);
 
-        List<Word> QueryWord(int id, string name);
+        //List<Word> QueryWord(int id, string name);
 
         ///// <summary>
         ///// 添加关联的同义词

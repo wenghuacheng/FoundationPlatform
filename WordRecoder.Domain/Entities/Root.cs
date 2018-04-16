@@ -1,8 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 using WordRecoder.Domain.ValueObjects;
-using WordRecoder.Domain.Entities.DbAttributes;
+using Domain.Core;
+using Domain.Core.Entities.DbAttributes;
 
 namespace WordRecoder.Domain.Entities
 {
