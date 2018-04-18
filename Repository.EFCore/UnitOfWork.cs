@@ -10,7 +10,7 @@ namespace Repository.EFCore
         where TEntity : class, IEntity<TPrimaryKey>
         where TDbContext : DbContext
     {
-        private readonly TDbContext _context;
+        protected readonly TDbContext _context;
 
         public UnitOfWork(TDbContext context)
         {

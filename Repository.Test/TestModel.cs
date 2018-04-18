@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Repository.Dapper.Test
+namespace Repository.Test
 {
     public class Test : IEntity<int>
     {

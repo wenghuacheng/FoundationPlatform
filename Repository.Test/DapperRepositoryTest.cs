@@ -1,21 +1,24 @@
-﻿using DapperExtensions;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using MySql.Data.MySqlClient;
+using Repository.Dapper;
 using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Linq;
 
-namespace Repository.Dapper.Test
+namespace Repository.Test
 {
     [TestClass]
     public class DapperRepositoryTest
     {
-        private DapperRepositoryBase<Test, int> repository = new DapperRepositoryBase<Test, int>(null);
+        private DapperRepositoryBase<Test, int> repository;
+        IDapperUnitOfWork<Test, int> unitOfWork;
 
         public DapperRepositoryTest()
         {
-            //repository.Connection = new MySql.Data.MySqlClient.MySqlConnection("server=192.168.1.105;user id=root;password=123456;database=WORDREPOSITORY");
+            MySqlConnection mySqlConnection = new MySql.Data.MySqlClient.MySqlConnection();
+            var connection =new MySql.Data.MySqlClient.MySqlConnection("server=localhost;user id=root;password=123456;database=Test");
 
+            unitOfWork = new UnitOfWork<Test, int>(connection);
+            repository = new DapperRepositoryBase<Test, int>(unitOfWork);
         }
 
         [TestMethod]
@@ -34,7 +37,7 @@ namespace Repository.Dapper.Test
         [TestMethod]
         public void Dapper_count_Test()
         {
-            var count = repository.Count(p => p.Id == 2 && p.name == "12345" || p.Id == 1);
+            var count = repository.Count(p => p.name == "12345" || p.Id == 21);
             Assert.AreEqual<int>(count, 1);
         }
 
@@ -55,14 +58,22 @@ namespace Repository.Dapper.Test
         [TestMethod]
         public void Dapper_FirstOrDefault_Test()
         {
-            var item = repository.FirstOrDefault(p => p.Id == 2);
-            Assert.IsNotNull(item);
+            try
+            {
+                var item = repository.FirstOrDefault(p => p.Id == 21);
+                Assert.IsNotNull(item);
+            }
+            catch (Exception ex)
+            {
+                Assert.Fail();
+            }
+         
         }
 
         [TestMethod]
         public void Dapper_Get_Test()
         {
-            var item = repository.Get(2);
+            var item = repository.Get(1);
             Assert.IsNotNull(item);
         }
 
@@ -96,11 +107,46 @@ namespace Repository.Dapper.Test
             Assert.AreNotEqual<int>(id, 1);
         }
 
+        [TestMethod]
         public void Dapper_Update_Test()
         {
             repository.Update(new Test() { Id = 2, name = "11111" });
             var item = repository.FirstOrDefault(2);
             Assert.AreEqual<string>(item.name, "11111");
+        }
+
+        [TestMethod]
+        public void Dapper_UnitOfWorkTestSuccess()
+        {
+            try
+            {
+                this.unitOfWork.RegisterNew(new Test() { name = "00" }, repository);
+                this.unitOfWork.RegisterNew(new Test() { name = "11" }, repository);
+                this.unitOfWork.RegisterNew(new Test() { name = "22" }, repository);
+                this.unitOfWork.SaveChange();
+            }
+            catch (Exception ex)
+            {
+                Assert.Fail();
+            }
+
+        }
+
+        [TestMethod]
+        public void Dapper_UnitOfWorkTestFail()
+        {
+            try
+            {
+                this.unitOfWork.RegisterNew(new Test() { name = "0" }, repository);
+                this.unitOfWork.RegisterNew(new Test() { name = "1" }, repository);
+                this.unitOfWork.RegisterNew(new Test(), repository);
+                this.unitOfWork.SaveChange();
+                Assert.Fail();
+            }
+            catch (Exception ex)
+            {
+                //Assert.IsInstanceOfType(ex, typeof(MySql.Data.MySqlClient.MySqlException));
+            }
         }
     }
 }

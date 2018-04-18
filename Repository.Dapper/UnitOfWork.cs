@@ -10,7 +10,12 @@ namespace Repository.Dapper
 {
     public class UnitOfWork<TEntity, TPrimaryKey> : IDapperUnitOfWork<TEntity, TPrimaryKey> where TEntity : class, IEntity<TPrimaryKey>
     {
-        public DbConnection Connection { get; set; }
+        public UnitOfWork(DbConnection connection)
+        {
+            this.Connection = connection;
+        }
+
+        public DbConnection Connection { get; private set; }
 
         public readonly Dictionary<TEntity, IUnitOfWorkRepository<TEntity, TPrimaryKey>> addDict = new Dictionary<TEntity, IUnitOfWorkRepository<TEntity, TPrimaryKey>>();
         public readonly Dictionary<TEntity, IUnitOfWorkRepository<TEntity, TPrimaryKey>> deleteDict = new Dictionary<TEntity, IUnitOfWorkRepository<TEntity, TPrimaryKey>>();
@@ -19,6 +24,9 @@ namespace Repository.Dapper
 
         public void SaveChange()
         {
+            if (Connection.State != ConnectionState.Open)
+                Connection.Open();
+
             var transaction = Connection.BeginTransaction();
 
             try
@@ -40,9 +48,10 @@ namespace Repository.Dapper
 
                 transaction.Commit();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 transaction.Rollback();
+                throw ex;
             }
             finally
             {
@@ -69,7 +78,7 @@ namespace Repository.Dapper
         {
             deleteDict.Clear();
             addDict.Clear();
-            updateDict.Clear();            
+            updateDict.Clear();
         }
     }
 }
