@@ -1,29 +1,17 @@
 ﻿using Caliburn.Micro;
-using Infrastructure.Converter;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using WordRecoder.Infrastructure.Container;
-using WordRecoder.Presentation.WPF.General;
 using WordRecoder.Presentation.WPF.General.Interfaces;
 using WordRecoder.Presentation.WPF.Models;
 using WordRecoder.Presentation.WPF.Services.ConstantDataProvider;
-using WordRecoder.Presentation.WPF.ViewModels.General;
 using WordRecoder.Presentation.WPF.ViewModels.Word;
-using WordRecoder.Presentation.WPF.Views.Main;
 
 namespace WordRecoder.Presentation.WPF.ViewModels.Main
 {
     public class ShellViewModel : Screen, IWaitLayerProvider
     {
-        public ShellViewModel()
+        public ShellViewModel(IPageManager pageManager)
         {
-            var dependencyContainer = IoC.Get<IDependencyContainer>();
-            this.ViewAware = dependencyContainer.GetSerivces<IPageManager>() as PageManagerViewModel;
+            this.ViewAware = pageManager as PageManagerViewModel;
 
             TreeItems.AddRange(MainMenuTreeItemsProvider.GetDatas());
             TreeItems.FirstOrDefault().IsSelected = true;

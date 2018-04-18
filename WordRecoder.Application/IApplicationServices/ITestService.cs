@@ -2,12 +2,11 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
-using WordRecoder.Application.Dto;
 
 namespace WordRecoder.Application.IApplicationServices
 {
-    public interface IWordService : IApplicationService
+    public interface ITestService : IApplicationService
     {
-        void AddOrUpdateWord(WordDto word);
+        string GetString();
     }
 }

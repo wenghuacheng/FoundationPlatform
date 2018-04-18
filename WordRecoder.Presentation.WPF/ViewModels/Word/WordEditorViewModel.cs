@@ -1,18 +1,14 @@
-﻿using System;
+﻿using AutoMapper;
+using Caliburn.Micro;
+using Infrastructure.Extensions;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Caliburn.Micro;
-using WordRecoder.Domain.ValueObjects;
-using Infrastructure.Extensions;
-using WordRecoder.Infrastructure.Container;
-using WordRecoder.Application.IApplicationServices;
-using WordRecoder.Application.Dto;
 using System.Windows;
-using WordRecoder.Presentation.WPF.General.Interfaces;
+using WordRecoder.Application.Dto;
+using WordRecoder.Application.IApplicationServices;
+using WordRecoder.Domain.ValueObjects;
 using WordRecoder.Presentation.WPF.CustomerControls.AutoCompleteTextbox;
-using AutoMapper;
+using WordRecoder.Presentation.WPF.General.Interfaces;
 
 namespace WordRecoder.Presentation.WPF.ViewModels.Word
 {
@@ -86,7 +82,7 @@ namespace WordRecoder.Presentation.WPF.ViewModels.Word
             AutoCompleteTextbox control = args.Source as AutoCompleteTextbox;
             if (control == null) return;
 
-            var services = IoC.Get<IDependencyContainer>().GetSerivces<IRootSerivce>();
+            var services = IoC.Get<IRootSerivce>();
 
             var source = await services.QueryRoot(new RootDto() { Name = args.OriginalSource.ToString() });
             var items = source.Select(p => new AutoCompleteRootDisplayModel(p));
@@ -125,7 +121,7 @@ namespace WordRecoder.Presentation.WPF.ViewModels.Word
 
         public void Save()
         {
-            var services = IoC.Get<IDependencyContainer>().GetSerivces<IWordService>();
+            var services = IoC.Get<IWordService>();
             services.AddOrUpdateWord(Mapper.Map<WordDto>(this.Model));
         }
 

@@ -1,14 +1,13 @@
-﻿using Caliburn.Micro;
+﻿using AutoMapper;
+using Caliburn.Micro;
+using Infrastructure.Extensions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using WordRecoder.Domain.ValueObjects;
-using Infrastructure.Extensions;
-using AutoMapper;
-using WordRecoder.Infrastructure.Container;
-using WordRecoder.Presentation.WPF.Models.DisplayModels;
-using WordRecoder.Application.IApplicationServices;
 using WordRecoder.Application.Dto;
+using WordRecoder.Application.IApplicationServices;
+using WordRecoder.Domain.ValueObjects;
+using WordRecoder.Presentation.WPF.Models.DisplayModels;
 
 namespace WordRecoder.Presentation.WPF.ViewModels.Word
 {
@@ -19,8 +18,7 @@ namespace WordRecoder.Presentation.WPF.ViewModels.Word
         public RootEditorViewModel(RootDisplayModel model = null)
         {
             RootTypeList = typeof(RootType).ToList();
-            var container = IoC.Get<IDependencyContainer>();
-            this.mRootSerivce = container.GetSerivces<IRootSerivce>();
+            this.mRootSerivce = IoC.Get<IRootSerivce>();
             if (model == null)
                 Model = new RootDisplayModel();
             else

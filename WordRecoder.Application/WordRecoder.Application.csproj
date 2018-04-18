@@ -9,6 +9,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Application.Core\Application.Core.csproj" />
     <ProjectReference Include="..\WordRecoder.Domain\WordRecoder.Domain.csproj" />
     <ProjectReference Include="..\WordRecoder.Infrastructure\WordRecoder.Infrastructure.csproj" />
   </ItemGroup>

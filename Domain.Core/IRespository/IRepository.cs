@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Domain.Core.Dependency;
+using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Text;
@@ -6,12 +7,12 @@ using System.Threading.Tasks;
 
 namespace Domain.Core.IRespository
 {
-    public interface IRepository
+    public interface IRepository : ITransientDependency
     {
 
     }
 
-    public interface IRepository<TEntity, TPrimaryKey> where TEntity : class, IEntity<TPrimaryKey>
+    public interface IRepository<TEntity, TPrimaryKey> : IRepository where TEntity : class, IEntity<TPrimaryKey>
     {
         #region Single
         TEntity Single(TPrimaryKey id);
@@ -66,7 +67,7 @@ namespace Domain.Core.IRespository
         #region Query Sql
         IEnumerable<TEntity> Query(string query, object parameters = null);
 
-        Task<IEnumerable<TEntity>> QueryAsync(string query, object parameters = null);        
+        Task<IEnumerable<TEntity>> QueryAsync(string query, object parameters = null);
         #endregion
 
         #region Execute Sql

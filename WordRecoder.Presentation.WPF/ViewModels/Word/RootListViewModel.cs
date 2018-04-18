@@ -3,10 +3,8 @@ using Caliburn.Micro;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using WordRecoder.Application.IApplicationServices;
-using WordRecoder.Infrastructure.Container;
 using WordRecoder.Presentation.WPF.General.Interfaces;
 using WordRecoder.Presentation.WPF.Models.DisplayModels;
 using WordRecoder.Presentation.WPF.ViewModels.General;
@@ -21,9 +19,8 @@ namespace WordRecoder.Presentation.WPF.ViewModels.Word
         #region Ctor
         public RootListViewModel() : base()
         {
-            var container = IoC.Get<IDependencyContainer>();
-            this.mRootSerivce = container.GetSerivces<IRootSerivce>();
-            this.mPageManager = container.GetSerivces<IPageManager>();
+            this.mRootSerivce = IoC.Get<IRootSerivce>();
+            this.mPageManager = IoC.Get<IPageManager>();
         }
         #endregion
 
