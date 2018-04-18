@@ -16,8 +16,6 @@ namespace WordRecoder.Infrastructure.Container
         public void Register()
         {
             dependencyContainer.RegisterType<MigrationRepository, IMigrationRepository>();
-            dependencyContainer.RegisterType<WordRepository, IWordRepository>();
-            dependencyContainer.RegisterType<RootRepository, IRootRepository>();
             dependencyContainer.RegisterType<WordRootRepository, IWordRootRepository>();
             dependencyContainer.RegisterType<DbConnectionProvider, IDbConnectionProvider>();
         }

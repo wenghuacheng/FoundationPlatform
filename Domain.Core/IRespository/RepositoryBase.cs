@@ -8,8 +8,12 @@ using System.Threading.Tasks;
 
 namespace Domain.Core.IRespository
 {
-    public abstract class RepositoryBase<TEntity, TPrimaryKey> : IRepository<TEntity, TPrimaryKey> where TEntity : class, IEntity<TPrimaryKey>
+    public abstract class RepositoryBase<TEntity, TPrimaryKey> : IRepository<TEntity, TPrimaryKey>, IUnitOfWorkRepository<TEntity, TPrimaryKey> where TEntity : class, IEntity<TPrimaryKey>
     {
+        public RepositoryBase()
+        {
+        }
+
         #region IMapperBaseRepository   
         #region Count     
         public virtual Task<int> CountAsync(Expression<Func<TEntity, bool>> predicate)
@@ -101,10 +105,6 @@ namespace Domain.Core.IRespository
             return Task.FromResult<IEnumerable<TEntity>>(Query(query, parameters));
         }
 
-        public virtual Task<IEnumerable<TAny>> QueryAsync<TAny>(string query, object parameters = null) where TAny : class
-        {
-            return Task.FromResult<IEnumerable<TAny>>(Query<TAny>(query, parameters));
-        }
         #endregion
 
         #region Single   
@@ -166,8 +166,6 @@ namespace Domain.Core.IRespository
 
         #region Query
         public abstract IEnumerable<TEntity> Query(string query, object parameters = null);
-
-        public abstract IEnumerable<TAny> Query<TAny>(string query, object parameters = null) where TAny : class;
         #endregion
 
         #region Single
@@ -177,6 +175,24 @@ namespace Domain.Core.IRespository
         #endregion
 
         public abstract void Update(TEntity entity);
+
+        #region IUnitOfWorkRepository
+        public void PersistAdd(TEntity entity)
+        {
+            this.Insert(entity);
+        }
+
+        public void PersistRemove(TEntity entity)
+        {
+            this.Delete(entity);
+        }
+
+        public void PersistUpdate(TEntity entity)
+        {
+            this.Update(entity);
+        }
+        #endregion
+
         #endregion
     }
 }

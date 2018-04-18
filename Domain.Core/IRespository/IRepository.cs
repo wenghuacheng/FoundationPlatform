@@ -66,11 +66,7 @@ namespace Domain.Core.IRespository
         #region Query Sql
         IEnumerable<TEntity> Query(string query, object parameters = null);
 
-        Task<IEnumerable<TEntity>> QueryAsync(string query, object parameters = null);
-
-        IEnumerable<TAny> Query<TAny>(string query, object parameters = null) where TAny : class;
-
-        Task<IEnumerable<TAny>> QueryAsync<TAny>(string query, object parameters = null) where TAny : class;
+        Task<IEnumerable<TEntity>> QueryAsync(string query, object parameters = null);        
         #endregion
 
         #region Execute Sql

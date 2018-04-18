@@ -10,11 +10,11 @@ namespace Repository.Dapper.Test
     [TestClass]
     public class DapperRepositoryTest
     {
-        private DapperRepositoryBase<Test, int> repository = new DapperRepositoryBase<Test, int>();
+        private DapperRepositoryBase<Test, int> repository = new DapperRepositoryBase<Test, int>(null);
 
         public DapperRepositoryTest()
         {
-            repository.Connection = new MySql.Data.MySqlClient.MySqlConnection("server=192.168.1.105;user id=root;password=123456;database=WORDREPOSITORY");
+            //repository.Connection = new MySql.Data.MySqlClient.MySqlConnection("server=192.168.1.105;user id=root;password=123456;database=WORDREPOSITORY");
 
         }
 

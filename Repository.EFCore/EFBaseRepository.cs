@@ -12,20 +12,18 @@ namespace Repository.EFCore
         where TEntity : class, IEntity<TPrimaryKey>
         where TDbContext : DbContext
     {
-        private IDbContextProvider<TDbContext> provider;
+        protected IEFUnitOfWork<TEntity, TPrimaryKey, TDbContext> _unitOfWork;
 
-        public EFCoreBaseRepository(IDbContextProvider<TDbContext> provider)
+        public EFCoreBaseRepository(IEFUnitOfWork<TEntity, TPrimaryKey, TDbContext> unitOfWork)
         {
-            this.provider = provider;
+            this._unitOfWork = unitOfWork;
         }
 
         #region Properties
-        public DbContext Context { get { return provider.GetDbContext(); } }
+        public DbContext Context { get { return _unitOfWork.DbContext; } }
 
         public virtual DbSet<TEntity> Set => Context.Set<TEntity>();
         #endregion
-
-
 
         public override int Count(Expression<Func<TEntity, bool>> predicate)
         {
@@ -100,10 +98,6 @@ namespace Repository.EFCore
             return Set.FromSql<TEntity>(query, new object[] { parameters });
         }
 
-        public override IEnumerable<TAny> Query<TAny>(string query, object parameters = null)
-        {
-            throw new NotSupportedException();
-        }
 
         public override TEntity Single(TPrimaryKey id)
         {
