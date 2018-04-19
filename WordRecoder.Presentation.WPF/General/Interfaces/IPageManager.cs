@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace WordRecoder.Presentation.WPF.General.Interfaces
 {
-    public interface IPageManager : ITransientDependency
+    public interface IPageManager : ISingletonDependency
     {
         void AddPage(ViewAware viewAware);
     }

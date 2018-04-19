@@ -19,23 +19,6 @@ namespace WordRecoder.Domain.Entities
 
         public string Derivative { get; set; }
 
-        [Ignore]
-        /// <summary>
-        /// 派生词
-        /// </summary>
-        public List<string> DerivativeList
-        {
-            get
-            {
-                List<string> result = new List<string>();
-                if (!string.IsNullOrWhiteSpace(Derivative))
-                {
-                    result.AddRange(Derivative.Split(','));
-                }
-                return result;
-            }
-        }
-
         /// <summary>
         /// 类型
         /// </summary>

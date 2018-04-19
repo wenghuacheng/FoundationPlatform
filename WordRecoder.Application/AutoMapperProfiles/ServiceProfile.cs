@@ -11,16 +11,8 @@ namespace WordRecoder.Application.AutoMapperProfiles
     {
         public ServiceProfile()
         {
-            this.CreateMap<RootDto, Root>()
-                .ForMember(p => p.Derivative, (IMemberConfigurationExpression<RootDto, Root, object> opt) =>
-            {
-                opt.MapFrom<string>(src => string.Join(",", src.Derivative));
-            });
-            this.CreateMap<Root, RootDto>()
-             .ForMember(p => p.Derivative, (IMemberConfigurationExpression<Root, RootDto, object> opt) =>
-             {
-                 opt.MapFrom<List<string>>(src => src.DerivativeList);
-             });
+            this.CreateMap<RootDto, Root>();
+            this.CreateMap<Root, RootDto>();
             this.CreateMap<WordDto, Word>();
         }
     }

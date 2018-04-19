@@ -20,7 +20,7 @@ namespace WordRecoder.Presentation.WPF.AutoMapperProfiles
             this.CreateMap<RootDisplayModel, RootDto>()
              .ForMember(p => p.Derivative, (IMemberConfigurationExpression<RootDisplayModel, RootDto, object> opt) =>
              {
-                 opt.MapFrom<List<string>>(src => src.Derivative.Select(t => t.Name).ToList());
+                 opt.MapFrom<string>(src => string.Join(",", src.Derivative.Select(t => t.Name).ToList()));
              });
             this.CreateMap<RootDto, RootDisplayModel>()
                 .ForMember(p => p.Derivative, opt =>
@@ -41,7 +41,7 @@ namespace WordRecoder.Presentation.WPF.AutoMapperProfiles
         public BindableCollection<InputModel> Resolve(RootDto source, RootDisplayModel destination, BindableCollection<InputModel> destMember, ResolutionContext context)
         {
             BindableCollection<InputModel> result = new BindableCollection<InputModel>();
-            result.AddRange(source.Derivative.Select(p => new InputModel() { Name = p }));
+            result.AddRange(source.DerivativeList.Select(p => new InputModel() { Name = p }));
             return result;
         }
     }

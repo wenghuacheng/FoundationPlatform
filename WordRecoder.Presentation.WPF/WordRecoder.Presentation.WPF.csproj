@@ -260,6 +260,10 @@
       <Project>{b4728816-c95c-4c5d-945a-8987290ff7e3}</Project>
       <Name>Infrastructure</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Repository.Dapper\Repository.Dapper.csproj">
+      <Project>{2bfdd841-611e-4dc0-b8b5-41318545716b}</Project>
+      <Name>Repository.Dapper</Name>
+    </ProjectReference>
     <ProjectReference Include="..\WordRecoder.Application\WordRecoder.Application.csproj">
       <Project>{6e54f178-55b9-4b41-95ce-020e0354acf2}</Project>
       <Name>WordRecoder.Application</Name>

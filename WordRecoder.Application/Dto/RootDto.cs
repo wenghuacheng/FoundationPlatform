@@ -18,7 +18,23 @@ namespace WordRecoder.Application.Dto
         /// <summary>
         /// 派生词
         /// </summary>
-        public List<string> Derivative { get; set; }
+        public string Derivative { get; set; }
+
+        /// <summary>
+        /// 派生词
+        /// </summary>
+        public List<string> DerivativeList
+        {
+            get
+            {
+                List<string> result = new List<string>();
+                if (!string.IsNullOrWhiteSpace(Derivative))
+                {
+                    result.AddRange(Derivative.Split(','));
+                }
+                return result;
+            }
+        }
 
         /// <summary>
         /// 类型

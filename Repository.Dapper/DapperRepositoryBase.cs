@@ -151,4 +151,11 @@ namespace Repository.Dapper
         }
         #endregion
     }
+
+    public class DapperRepositoryBase<TEntity> : DapperRepositoryBase<TEntity, int>, IRepository<TEntity> where TEntity : class, IEntity<int>
+    {
+        public DapperRepositoryBase(IDapperUnitOfWork<TEntity, int> unitOfWork) : base(unitOfWork)
+        {
+        }
+    }
 }

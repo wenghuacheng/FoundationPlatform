@@ -8,14 +8,15 @@ using WordRecoder.Domain.Entities;
 using System.Linq;
 using System.Threading.Tasks;
 using WordRecoder.Domain.IRepositories;
+using Domain.Core.IRespository;
 
 namespace WordRecoder.Application.ApplicationServices
 {
     public class RootSerivce : IRootSerivce
     {
-        private IRootRepository mRootRepository;
+        private IRepository<Root> mRootRepository;
 
-        public RootSerivce(IRootRepository rootRepository)
+        public RootSerivce(IRepository<Root> rootRepository)
         {
             this.mRootRepository = rootRepository;
         }

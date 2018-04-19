@@ -1,16 +1,16 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
+using System.Data.Common;
 using System.IO;
-using System.Linq;
 using System.Reflection;
-using System.Text;
 using System.Windows;
 using Autofac;
 using AutoMapper;
 using Caliburn.Micro;
 using Domain.Core.Dependency;
 using Domain.Core.IRepository;
+using Domain.Core.IRespository;
+using Repository.Dapper;
 using WordRecoder.Infrastructure.Migration;
 using WordRecoder.Infrastructure.Repository;
 using WordRecoder.Presentation.WPF.ViewModels.Main;
@@ -59,6 +59,17 @@ namespace WordRecoder.Presentation.WPF
             //注册应用程序服务
             builder.RegisterAssemblyTypes(Assembly.GetExecutingAssembly()).AsImplementedInterfaces()
              .As<ITransientDependency>();
+            builder.RegisterAssemblyTypes(Assembly.GetExecutingAssembly()).AsImplementedInterfaces()
+                .As<ISingletonDependency>().SingleInstance();
+
+            #region 注册仓储
+            var dbConnection = DbConnectionFactory.GetDatabaseMysqlConnection();
+            builder.RegisterInstance<DbConnection>(dbConnection);
+            //注册单元模式
+            builder.RegisterGeneric(typeof(UnitOfWork<,>)).As(typeof(IDapperUnitOfWork<,>));
+            //注册默认的仓储（泛型类注册）
+            builder.RegisterGeneric(typeof(DapperRepositoryBase<>)).As(typeof(IRepository<>));
+            #endregion
 
             this.container = builder.Build();
 

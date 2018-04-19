@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Domain.Core.IRespository
 {
-    public interface IRepository : ITransientDependency
+    public interface IRepository
     {
 
     }
@@ -101,5 +101,10 @@ namespace Domain.Core.IRespository
 
         Task DeleteAsync(Expression<Func<TEntity, bool>> predicate);
         #endregion
+    }
+
+    public interface IRepository<TEntity> : IRepository<TEntity, int> where TEntity : class, IEntity<int>
+    {
+
     }
 }

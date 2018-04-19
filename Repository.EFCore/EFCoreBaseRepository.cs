@@ -114,4 +114,13 @@ namespace Repository.EFCore
             Set.Update(entity);
         }
     }
+
+    public class EFCoreBaseRepository<TEntity, TDbContext> : EFCoreBaseRepository<TEntity, int, TDbContext>, IRepository<TEntity>
+        where TEntity : class, IEntity<int>
+        where TDbContext : DbContext
+    {
+        public EFCoreBaseRepository(IEFUnitOfWork<TEntity, int, TDbContext> unitOfWork) : base(unitOfWork)
+        {
+        }
+    }
 }

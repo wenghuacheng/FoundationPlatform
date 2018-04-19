@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Domain.Core.IRespository;
 using System.Collections.Generic;
 using WordRecoder.Application.Dto;
 using WordRecoder.Application.IApplicationServices;
@@ -9,10 +10,10 @@ namespace WordRecoder.Application.ApplicationServices
 {
     public class WordService : IWordService
     {
-        private IWordRepository mWordRepository;
+        private IRepository<Word> mWordRepository;
         private IWordRootRepository mWordRootRepository;
 
-        public WordService(IWordRepository wordRepository, IWordRootRepository wordRootRepository)
+        public WordService(IRepository<Word> wordRepository, IWordRootRepository wordRootRepository)
         {
             this.mWordRepository = wordRepository;
             this.mWordRootRepository = wordRootRepository;
