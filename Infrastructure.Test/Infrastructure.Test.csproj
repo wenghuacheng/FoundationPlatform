@@ -66,6 +66,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="HelperTest.cs" />
     <Compile Include="MemoryCacheTest.cs" />
     <Compile Include="EncryptionTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
