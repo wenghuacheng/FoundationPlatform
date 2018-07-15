@@ -1,6 +1,8 @@
 ﻿using Domain.Core.Dependency;
 using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.Common;
 using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
@@ -77,29 +79,29 @@ namespace Domain.Core.IRespository
         #endregion
 
         #region Insert
-        void Insert(TEntity entity);
+        void Insert(TEntity entity, IDbTransaction transaction);
 
-        TPrimaryKey InsertAndGetId(TEntity entity);
+        TPrimaryKey InsertAndGetId(TEntity entity, IDbTransaction transaction);
 
-        Task InsertAsync(TEntity entity);
+        Task InsertAsync(TEntity entity, IDbTransaction transaction);
 
-        Task<TPrimaryKey> InsertAndGetIdAsync(TEntity entity);
+        Task<TPrimaryKey> InsertAndGetIdAsync(TEntity entity, IDbTransaction transaction);
         #endregion
 
         #region Update
-        void Update(TEntity entity);
+        void Update(TEntity entit, IDbTransaction transactiony);
 
-        Task UpdateAsync(TEntity entity);
+        Task UpdateAsync(TEntity entity, IDbTransaction transaction);
         #endregion
 
         #region Delete
-        void Delete(TEntity entity);
+        void Delete(TEntity entity, IDbTransaction transaction);
 
-        void Delete(Expression<Func<TEntity, bool>> predicate);
+        void Delete(Expression<Func<TEntity, bool>> predicate, IDbTransaction transaction);
 
-        Task DeleteAsync(TEntity entity);
+        Task DeleteAsync(TEntity entity, IDbTransaction transaction);
 
-        Task DeleteAsync(Expression<Func<TEntity, bool>> predicate);
+        Task DeleteAsync(Expression<Func<TEntity, bool>> predicate, IDbTransaction transaction);
         #endregion
     }
 

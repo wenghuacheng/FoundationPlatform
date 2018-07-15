@@ -5,10 +5,12 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.Common;
 using System.Text;
+using Dapper;
+using System.Transactions;
 
 namespace Repository.Dapper
 {
-    public class UnitOfWork<TEntity, TPrimaryKey> : IDapperUnitOfWork<TEntity, TPrimaryKey> where TEntity : class, IEntity<TPrimaryKey>
+    public class UnitOfWork : IDapperUnitOfWork
     {
         public UnitOfWork(DbConnection connection)
         {
@@ -17,9 +19,9 @@ namespace Repository.Dapper
 
         public DbConnection Connection { get; private set; }
 
-        public readonly Dictionary<TEntity, IUnitOfWorkRepository<TEntity, TPrimaryKey>> addDict = new Dictionary<TEntity, IUnitOfWorkRepository<TEntity, TPrimaryKey>>();
-        public readonly Dictionary<TEntity, IUnitOfWorkRepository<TEntity, TPrimaryKey>> deleteDict = new Dictionary<TEntity, IUnitOfWorkRepository<TEntity, TPrimaryKey>>();
-        public readonly Dictionary<TEntity, IUnitOfWorkRepository<TEntity, TPrimaryKey>> updateDict = new Dictionary<TEntity, IUnitOfWorkRepository<TEntity, TPrimaryKey>>();
+        public readonly Dictionary<IEntity, IUnitOfWorkRepository> addDict = new Dictionary<IEntity, IUnitOfWorkRepository>();
+        public readonly Dictionary<IEntity, IUnitOfWorkRepository> deleteDict = new Dictionary<IEntity, IUnitOfWorkRepository>();
+        public readonly Dictionary<IEntity, IUnitOfWorkRepository> updateDict = new Dictionary<IEntity, IUnitOfWorkRepository>();
 
 
         public void SaveChange()
@@ -27,58 +29,61 @@ namespace Repository.Dapper
             if (Connection.State != ConnectionState.Open)
                 Connection.Open();
 
-            var transaction = Connection.BeginTransaction();
-
-            try
+            using (var transaction = Connection.BeginTransaction())
             {
-                foreach (var p in addDict)
-                {
-                    p.Value.PersistAdd(p.Key);
-                }
 
-                foreach (var p in deleteDict)
+                try
                 {
-                    p.Value.PersistRemove(p.Key);
-                }
+                    foreach (var p in addDict)
+                    {
+                        p.Value.PersistAdd(p.Key, transaction);
+                    }
 
-                foreach (var p in updateDict)
+                    foreach (var p in deleteDict)
+                    {
+                        p.Value.PersistRemove(p.Key, transaction);
+                    }
+
+                    foreach (var p in updateDict)
+                    {
+                        p.Value.PersistUpdate(p.Key, transaction);
+                    }
+
+                    transaction.Commit();
+                }
+                catch (Exception ex)
                 {
-                    p.Value.PersistUpdate(p.Key);
+                    transaction.Rollback();
+                    throw ex;
                 }
-
-                transaction.Commit();
-            }
-            catch (Exception ex)
-            {
-                transaction.Rollback();
-                throw ex;
-            }
-            finally
-            {
-                Clear();
+                finally
+                {
+                    Clear();
+                }
             }
         }
 
-        public void RegisterNew(TEntity entity, IUnitOfWorkRepository<TEntity, TPrimaryKey> repository)
+
+        private void Clear()
+        {
+            //deleteDict.Clear();
+            //addDict.Clear();
+            //updateDict.Clear();
+        }
+
+        public void RegisterNew(IEntity entity, IUnitOfWorkRepository repository)
         {
             addDict.Add(entity, repository);
         }
 
-        public void RegisterDelete(TEntity entity, IUnitOfWorkRepository<TEntity, TPrimaryKey> repository)
+        public void RegisterDelete(IEntity entity, IUnitOfWorkRepository repository)
         {
             deleteDict.Add(entity, repository);
         }
 
-        public void RegisterUpdate(TEntity entity, IUnitOfWorkRepository<TEntity, TPrimaryKey> repository)
+        public void RegisterUpdate(IEntity entity, IUnitOfWorkRepository repository)
         {
             updateDict.Add(entity, repository);
         }
-
-        private void Clear()
-        {
-            deleteDict.Clear();
-            addDict.Clear();
-            updateDict.Clear();
-        }
-    }    
+    }
 }

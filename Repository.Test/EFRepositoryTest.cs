@@ -10,11 +10,11 @@ namespace Repository.Test
     public class EfRepositoryTest
     {
         private EFCoreBaseRepository<Test, int, EFContext> repository;
-        IEFUnitOfWork<Test, int, EFContext> unitOfWork;
+        IEFUnitOfWork<EFContext> unitOfWork;
 
         public EfRepositoryTest()
         {
-            unitOfWork = new UnitOfWork<Test, int, EFContext>(new EFContext());
+            unitOfWork = new UnitOfWork<EFContext>(new EFContext());
             repository = new EFCoreBaseRepository<Test, int, EFContext>(unitOfWork);
         }
 

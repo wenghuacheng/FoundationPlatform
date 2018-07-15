@@ -9,13 +9,14 @@ using System.Linq;
 using Domain.Core;
 using Domain.Core.IRespository;
 using Repository.Dapper.Expressions;
+using System.Data;
 
 namespace Repository.Dapper
 {
-    public class DapperRepositoryBase<TEntity, TPrimaryKey> : RepositoryBase<TEntity, TPrimaryKey>, IUnitOfWorkRepository<TEntity, TPrimaryKey> where TEntity : class, IEntity<TPrimaryKey>
+    public class DapperRepositoryBase<TEntity, TPrimaryKey> : RepositoryBase<TEntity, TPrimaryKey> where TEntity : class, IEntity<TPrimaryKey>
     {
-        protected IDapperUnitOfWork<TEntity, TPrimaryKey> _unitOfWork;
-        public DapperRepositoryBase(IDapperUnitOfWork<TEntity, TPrimaryKey> unitOfWork)
+        protected IDapperUnitOfWork _unitOfWork;
+        public DapperRepositoryBase(IDapperUnitOfWork unitOfWork)
         {
             //使用mysql
             DapperExtensions.DapperExtensions.SqlDialect = new MySqlDialect();
@@ -27,6 +28,7 @@ namespace Repository.Dapper
         {
             get { return _unitOfWork.Connection; }
         }
+
         #endregion
 
         public override int Count(Expression<Func<TEntity, bool>> predicate)
@@ -87,9 +89,9 @@ namespace Repository.Dapper
         }
 
 
-        public override TPrimaryKey InsertAndGetId(TEntity entity)
+        public override TPrimaryKey InsertAndGetId(TEntity entity, IDbTransaction transaction = null)
         {
-            TPrimaryKey id = Connection.Insert<TEntity>(entity);
+            TPrimaryKey id = Connection.Insert<TEntity>(entity, transaction as DbTransaction);
             return id;
         }
 
@@ -110,51 +112,34 @@ namespace Repository.Dapper
             return result.FirstOrDefault();
         }
 
-        public override void Insert(TEntity entity)
+        public override void Insert(TEntity entity, IDbTransaction transaction = null)
         {
-            Connection.Insert<TEntity>(entity);
+            Connection.Insert<TEntity>(entity, transaction as DbTransaction);
         }
 
-        public override void Update(TEntity entity)
+        public override void Update(TEntity entity, IDbTransaction transaction = null)
         {
-            Connection.Update<TEntity>(entity);
+            Connection.Update<TEntity>(entity, transaction as DbTransaction);
         }
 
-        public override void Delete(TEntity entity)
+        public override void Delete(TEntity entity, IDbTransaction transaction = null)
         {
-            Connection.Delete<TEntity>(entity);
+            Connection.Delete<TEntity>(entity, transaction as DbTransaction);
         }
 
-        public override void Delete(Expression<Func<TEntity, bool>> predicate)
+        public override void Delete(Expression<Func<TEntity, bool>> predicate, IDbTransaction transaction = null)
         {
             var result = GetAll(predicate);
             foreach (var p in result)
             {
-                Connection.Delete<TEntity>(p);
+                Connection.Delete<TEntity>(p, transaction as DbTransaction);
             }
         }
-
-        #region IUnitOfWorkRepository
-        public void PersistAdd(TEntity entity)
-        {
-            this.Insert(entity);
-        }
-
-        public void PersistRemove(TEntity entity)
-        {
-            this.Delete(entity);
-        }
-
-        public void PersistUpdate(TEntity entity)
-        {
-            this.Update(entity);
-        }
-        #endregion
     }
 
     public class DapperRepositoryBase<TEntity> : DapperRepositoryBase<TEntity, int>, IRepository<TEntity> where TEntity : class, IEntity<int>
     {
-        public DapperRepositoryBase(IDapperUnitOfWork<TEntity, int> unitOfWork) : base(unitOfWork)
+        public DapperRepositoryBase(IDapperUnitOfWork unitOfWork) : base(unitOfWork)
         {
         }
     }

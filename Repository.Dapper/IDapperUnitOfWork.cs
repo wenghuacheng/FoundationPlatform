@@ -7,7 +7,7 @@ using System.Text;
 
 namespace Repository.Dapper
 {
-    public interface IDapperUnitOfWork<TEntity, TPrimaryKey> : IUnitOfWork<TEntity, TPrimaryKey> where TEntity : class, IEntity<TPrimaryKey>
+    public interface IDapperUnitOfWork : IUnitOfWork
     {
         DbConnection Connection { get; }
     }

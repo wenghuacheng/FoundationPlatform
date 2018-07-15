@@ -6,8 +6,7 @@ using System.Text;
 
 namespace Repository.EFCore
 {
-    public interface IEFUnitOfWork<TEntity, TPrimaryKey, TDbContext> : IUnitOfWork<TEntity, TPrimaryKey>
-        where TEntity : class, IEntity<TPrimaryKey>
+    public interface IEFUnitOfWork<TDbContext> : IUnitOfWork
         where TDbContext : DbContext
     {
         TDbContext DbContext { get; }

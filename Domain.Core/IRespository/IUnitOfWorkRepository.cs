@@ -1,19 +1,20 @@
 ﻿using Domain.Core;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Text;
 
 namespace Domain.Core
 {
     /// <summary>
-    /// 支持事务的操作
+    /// 支持事务的操作的仓储
     /// </summary>
-    public interface IUnitOfWorkRepository<TEntity, TPrimaryKey> where TEntity : class, IEntity<TPrimaryKey>
+    public interface IUnitOfWorkRepository
     {
-        void PersistAdd(TEntity entity);
+        void PersistAdd(IEntity entity, IDbTransaction transaction = null);
 
-        void PersistRemove(TEntity entity);
+        void PersistRemove(IEntity entity, IDbTransaction transaction = null);
 
-        void PersistUpdate(TEntity entity);
+        void PersistUpdate(IEntity entity, IDbTransaction transaction = null);
     }
 }

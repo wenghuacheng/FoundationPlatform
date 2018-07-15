@@ -3,6 +3,7 @@ using Domain.Core.IRespository;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Linq.Expressions;
 
@@ -12,9 +13,9 @@ namespace Repository.EFCore
         where TEntity : class, IEntity<TPrimaryKey>
         where TDbContext : DbContext
     {
-        protected IEFUnitOfWork<TEntity, TPrimaryKey, TDbContext> _unitOfWork;
+        protected IEFUnitOfWork<TDbContext> _unitOfWork;
 
-        public EFCoreBaseRepository(IEFUnitOfWork<TEntity, TPrimaryKey, TDbContext> unitOfWork)
+        public EFCoreBaseRepository(IEFUnitOfWork<TDbContext> unitOfWork)
         {
             this._unitOfWork = unitOfWork;
         }
@@ -30,16 +31,16 @@ namespace Repository.EFCore
             return Set.Count(predicate);
         }
 
-        public override void Delete(TEntity entity)
+        public override void Delete(TEntity entity, IDbTransaction transaction = null)
         {
             Set.Remove(entity);
         }
 
-        public override void Delete(Expression<Func<TEntity, bool>> predicate)
+        public override void Delete(Expression<Func<TEntity, bool>> predicate, IDbTransaction transaction = null)
         {
             var entities = GetAll(predicate);
             foreach (var entity in entities)
-                Delete(entity);
+                Delete(entity, transaction);
         }
 
         public override int Execute(string query, object parameters = null)
@@ -82,12 +83,12 @@ namespace Repository.EFCore
             return Set.Where(predicate).Skip(itemsPerPage * pageNumber).Take(pageNumber);
         }
 
-        public override void Insert(TEntity entity)
+        public override void Insert(TEntity entity, IDbTransaction transaction = null)
         {
             Set.Add(entity);
         }
 
-        public override TPrimaryKey InsertAndGetId(TEntity entity)
+        public override TPrimaryKey InsertAndGetId(TEntity entity, IDbTransaction transaction = null)
         {
             Set.Add(entity);
             return entity.Id;
@@ -109,7 +110,7 @@ namespace Repository.EFCore
             return Set.FirstOrDefault(predicate);
         }
 
-        public override void Update(TEntity entity)
+        public override void Update(TEntity entity, IDbTransaction transaction = null)
         {
             Set.Update(entity);
         }
@@ -119,7 +120,7 @@ namespace Repository.EFCore
         where TEntity : class, IEntity<int>
         where TDbContext : DbContext
     {
-        public EFCoreBaseRepository(IEFUnitOfWork<TEntity, int, TDbContext> unitOfWork) : base(unitOfWork)
+        public EFCoreBaseRepository(IEFUnitOfWork<TDbContext> unitOfWork) : base(unitOfWork)
         {
         }
     }

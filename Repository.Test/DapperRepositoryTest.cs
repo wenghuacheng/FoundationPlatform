@@ -10,14 +10,13 @@ namespace Repository.Test
     public class DapperRepositoryTest
     {
         private DapperRepositoryBase<Test, int> repository;
-        IDapperUnitOfWork<Test, int> unitOfWork;
+        IDapperUnitOfWork unitOfWork;
 
         public DapperRepositoryTest()
         {
-            MySqlConnection mySqlConnection = new MySql.Data.MySqlClient.MySqlConnection();
-            var connection =new MySql.Data.MySqlClient.MySqlConnection("server=localhost;user id=root;password=123456;database=Test");
+            var connection = new MySql.Data.MySqlClient.MySqlConnection("server=localhost;user id=root;password=123456;database=Test");
 
-            unitOfWork = new UnitOfWork<Test, int>(connection);
+            unitOfWork = new UnitOfWork(connection);
             repository = new DapperRepositoryBase<Test, int>(unitOfWork);
         }
 
@@ -47,7 +46,7 @@ namespace Repository.Test
             try
             {
                 var item = repository.FirstOrDefault(p => p.name == "12345" && p.Id != 2);
-                repository.Delete(item);
+                repository.Delete(item, null);
             }
             catch (Exception)
             {
@@ -67,7 +66,7 @@ namespace Repository.Test
             {
                 Assert.Fail();
             }
-         
+
         }
 
         [TestMethod]
@@ -127,7 +126,7 @@ namespace Repository.Test
             }
             catch (Exception ex)
             {
-                Assert.Fail();
+                Assert.Fail(ex.Message);
             }
 
         }

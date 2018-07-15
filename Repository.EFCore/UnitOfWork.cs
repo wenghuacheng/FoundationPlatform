@@ -6,8 +6,7 @@ using System.Text;
 
 namespace Repository.EFCore
 {
-    public class UnitOfWork<TEntity, TPrimaryKey, TDbContext> : IEFUnitOfWork<TEntity, TPrimaryKey, TDbContext>
-        where TEntity : class, IEntity<TPrimaryKey>
+    public class UnitOfWork<TDbContext> : IEFUnitOfWork<TDbContext>
         where TDbContext : DbContext
     {
         protected readonly TDbContext _context;
@@ -19,21 +18,23 @@ namespace Repository.EFCore
 
         public TDbContext DbContext => _context;
 
-        public void RegisterDelete(TEntity entity, IUnitOfWorkRepository<TEntity, TPrimaryKey> repository)
-        {       
-        }
-
-        public void RegisterNew(TEntity entity, IUnitOfWorkRepository<TEntity, TPrimaryKey> repository)
-        {            
-        }
-
-        public void RegisterUpdate(TEntity entity, IUnitOfWorkRepository<TEntity, TPrimaryKey> repository)
-        {
-        }
 
         public void SaveChange()
         {
             this._context.SaveChanges();
+        }
+
+        public void RegisterDelete(IEntity entity, IUnitOfWorkRepository repository)
+        {
+           
+        }
+
+        public void RegisterNew(IEntity entity, IUnitOfWorkRepository repository)
+        {
+        }
+
+        public void RegisterUpdate(IEntity entity, IUnitOfWorkRepository repository)
+        {
         }
     }
 }

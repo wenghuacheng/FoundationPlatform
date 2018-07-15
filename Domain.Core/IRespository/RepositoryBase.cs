@@ -2,13 +2,15 @@
 using Domain.Core.IRespository;
 using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.Common;
 using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Domain.Core.IRespository
 {
-    public abstract class RepositoryBase<TEntity, TPrimaryKey> : IRepository<TEntity, TPrimaryKey>, IUnitOfWorkRepository<TEntity, TPrimaryKey> where TEntity : class, IEntity<TPrimaryKey>
+    public abstract class RepositoryBase<TEntity, TPrimaryKey> : IRepository<TEntity, TPrimaryKey>, IUnitOfWorkRepository where TEntity : class, IEntity<TPrimaryKey>
     {
         public RepositoryBase()
         {
@@ -24,15 +26,15 @@ namespace Domain.Core.IRespository
 
         #region Delete
 
-        public virtual Task DeleteAsync(TEntity entity)
+        public virtual Task DeleteAsync(TEntity entity, IDbTransaction transaction)
         {
-            Delete(entity);
+            Delete(entity, transaction);
             return Task.FromResult(0);
         }
 
-        public virtual Task DeleteAsync(Expression<Func<TEntity, bool>> predicate)
+        public virtual Task DeleteAsync(Expression<Func<TEntity, bool>> predicate, IDbTransaction transaction)
         {
-            Delete(predicate);
+            Delete(predicate, transaction);
             return Task.FromResult(0);
         }
         #endregion
@@ -87,14 +89,14 @@ namespace Domain.Core.IRespository
         #endregion
 
         #region Insert
-        public virtual Task<TPrimaryKey> InsertAndGetIdAsync(TEntity entity)
+        public virtual Task<TPrimaryKey> InsertAndGetIdAsync(TEntity entity, IDbTransaction transaction)
         {
-            return Task.FromResult<TPrimaryKey>(InsertAndGetId(entity));
+            return Task.FromResult<TPrimaryKey>(InsertAndGetId(entity, transaction));
         }
 
-        public virtual Task InsertAsync(TEntity entity)
+        public virtual Task InsertAsync(TEntity entity, IDbTransaction transaction)
         {
-            Insert(entity);
+            Insert(entity, transaction);
             return Task.FromResult(0);
         }
         #endregion
@@ -120,9 +122,9 @@ namespace Domain.Core.IRespository
         #endregion
 
         #region Update
-        public virtual Task UpdateAsync(TEntity entity)
+        public virtual Task UpdateAsync(TEntity entity, IDbTransaction transaction)
         {
-            Update(entity);
+            Update(entity, transaction);
             return Task.FromResult(0);
         }
         #endregion
@@ -133,9 +135,9 @@ namespace Domain.Core.IRespository
         public abstract int Count(Expression<Func<TEntity, bool>> predicate);
 
         #region Delete
-        public abstract void Delete(TEntity entity);
+        public abstract void Delete(TEntity entity, IDbTransaction transaction);
 
-        public abstract void Delete(Expression<Func<TEntity, bool>> predicate);
+        public abstract void Delete(Expression<Func<TEntity, bool>> predicate, IDbTransaction transaction);
         #endregion
 
         public abstract int Execute(string query, object parameters = null);
@@ -159,9 +161,9 @@ namespace Domain.Core.IRespository
         #endregion
 
         #region Insert
-        public abstract void Insert(TEntity entity);
+        public abstract void Insert(TEntity entity, IDbTransaction transaction);
 
-        public abstract TPrimaryKey InsertAndGetId(TEntity entity);
+        public abstract TPrimaryKey InsertAndGetId(TEntity entity, IDbTransaction transaction);
         #endregion
 
         #region Query
@@ -174,22 +176,22 @@ namespace Domain.Core.IRespository
         public abstract TEntity Single(Expression<Func<TEntity, bool>> predicate);
         #endregion
 
-        public abstract void Update(TEntity entity);
+        public abstract void Update(TEntity entity, IDbTransaction transaction);
 
         #region IUnitOfWorkRepository
-        public void PersistAdd(TEntity entity)
+        public void PersistAdd(IEntity entity, IDbTransaction transaction)
         {
-            this.Insert(entity);
+            this.Insert(entity as TEntity, transaction);
         }
 
-        public void PersistRemove(TEntity entity)
+        public void PersistRemove(IEntity entity, IDbTransaction transaction)
         {
-            this.Delete(entity);
+            this.Delete(entity as TEntity, transaction);
         }
 
-        public void PersistUpdate(TEntity entity)
+        public void PersistUpdate(IEntity entity, IDbTransaction transaction)
         {
-            this.Update(entity);
+            this.Update(entity as TEntity, transaction);
         }
         #endregion
 
