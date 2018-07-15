@@ -1,4 +1,5 @@
 ﻿using Domain.Core;
+using Domain.Core.IRespository;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -26,7 +27,7 @@ namespace Repository.EFCore
 
         public void RegisterDelete(IEntity entity, IUnitOfWorkRepository repository)
         {
-           
+
         }
 
         public void RegisterNew(IEntity entity, IUnitOfWorkRepository repository)
@@ -35,6 +36,14 @@ namespace Repository.EFCore
 
         public void RegisterUpdate(IEntity entity, IUnitOfWorkRepository repository)
         {
+        }
+
+        public IRepository<TEntity, TPrimaryKey> Repository<TEntity, TPrimaryKey>() where TEntity : class, IEntity<TPrimaryKey>
+        {
+            var repositoryType = typeof(EFCoreBaseRepository<TEntity, TPrimaryKey, TDbContext>);
+            var repositoryInstance = Activator.CreateInstance(repositoryType, this) as IRepository<TEntity, TPrimaryKey>;
+            return repositoryInstance;
+
         }
     }
 }

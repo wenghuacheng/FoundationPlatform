@@ -146,6 +146,21 @@ namespace Repository.Test
                 //Assert.IsInstanceOfType(ex, typeof(MySql.Data.MySqlClient.MySqlException));
             }
         }
+
+        [TestMethod]
+        public void EF_CreateRepository()
+        {
+            try
+            {
+                var repostory = this.unitOfWork.Repository<Test, int>();
+                Assert.IsNotNull(repository);
+            }
+            catch (Exception ex)
+            {
+                Assert.Fail();
+            }
+
+        }
     }
 
     public class EFContext : Microsoft.EntityFrameworkCore.DbContext

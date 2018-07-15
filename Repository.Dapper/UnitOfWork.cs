@@ -12,6 +12,12 @@ namespace Repository.Dapper
 {
     public class UnitOfWork : IDapperUnitOfWork
     {
+        public readonly Dictionary<IEntity, IUnitOfWorkRepository> addDict = new Dictionary<IEntity, IUnitOfWorkRepository>();
+        public readonly Dictionary<IEntity, IUnitOfWorkRepository> deleteDict = new Dictionary<IEntity, IUnitOfWorkRepository>();
+        public readonly Dictionary<IEntity, IUnitOfWorkRepository> updateDict = new Dictionary<IEntity, IUnitOfWorkRepository>();
+
+        private readonly Dictionary<string, object> repositories = new Dictionary<string, object>();
+
         public UnitOfWork(DbConnection connection)
         {
             this.Connection = connection;
@@ -19,10 +25,21 @@ namespace Repository.Dapper
 
         public DbConnection Connection { get; private set; }
 
-        public readonly Dictionary<IEntity, IUnitOfWorkRepository> addDict = new Dictionary<IEntity, IUnitOfWorkRepository>();
-        public readonly Dictionary<IEntity, IUnitOfWorkRepository> deleteDict = new Dictionary<IEntity, IUnitOfWorkRepository>();
-        public readonly Dictionary<IEntity, IUnitOfWorkRepository> updateDict = new Dictionary<IEntity, IUnitOfWorkRepository>();
 
+        public void RegisterNew(IEntity entity, IUnitOfWorkRepository repository)
+        {
+            addDict.Add(entity, repository);
+        }
+
+        public void RegisterDelete(IEntity entity, IUnitOfWorkRepository repository)
+        {
+            deleteDict.Add(entity, repository);
+        }
+
+        public void RegisterUpdate(IEntity entity, IUnitOfWorkRepository repository)
+        {
+            updateDict.Add(entity, repository);
+        }
 
         public void SaveChange()
         {
@@ -63,27 +80,19 @@ namespace Repository.Dapper
             }
         }
 
-
         private void Clear()
         {
-            //deleteDict.Clear();
-            //addDict.Clear();
-            //updateDict.Clear();
+            deleteDict.Clear();
+            addDict.Clear();
+            updateDict.Clear();
         }
 
-        public void RegisterNew(IEntity entity, IUnitOfWorkRepository repository)
+        public IRepository<TEntity, TPrimaryKey> Repository<TEntity, TPrimaryKey>() where TEntity : class, IEntity<TPrimaryKey>
         {
-            addDict.Add(entity, repository);
-        }
+            var repositoryType = typeof(DapperRepositoryBase<TEntity, TPrimaryKey>);
+            var repositoryInstance = Activator.CreateInstance(repositoryType, this) as IRepository<TEntity, TPrimaryKey>;
+            return repositoryInstance;
 
-        public void RegisterDelete(IEntity entity, IUnitOfWorkRepository repository)
-        {
-            deleteDict.Add(entity, repository);
-        }
-
-        public void RegisterUpdate(IEntity entity, IUnitOfWorkRepository repository)
-        {
-            updateDict.Add(entity, repository);
         }
     }
 }
