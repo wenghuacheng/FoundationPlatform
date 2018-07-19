@@ -7,6 +7,7 @@ using System.Data.Common;
 using System.Text;
 using Dapper;
 using System.Transactions;
+using Domain.Core.Entities;
 
 namespace Repository.Dapper
 {

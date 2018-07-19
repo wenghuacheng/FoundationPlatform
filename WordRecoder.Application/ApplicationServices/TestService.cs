@@ -23,12 +23,12 @@ namespace WordRecoder.Application.ApplicationServices
             int l = 2000 - 20 * 2;
 
             root.Remark = l.ToString();
-            this.rootRepositor.Insert(root);
+            this.rootRepositor.Insert(root, null);
 
-            
+
         }
 
-        public int Add(int i,int j)
+        public int Add(int i, int j)
         {
             return i + j;
         }

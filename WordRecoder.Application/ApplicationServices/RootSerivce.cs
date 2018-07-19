@@ -25,9 +25,9 @@ namespace WordRecoder.Application.ApplicationServices
         public async Task AddOrUpdateRoot(RootDto rootDto)
         {
             if (rootDto.Id <= 0)
-                mRootRepository.Insert(Mapper.Map<Root>(rootDto));
+                mRootRepository.Insert(Mapper.Map<Root>(rootDto), null);
             else
-                mRootRepository.Update(Mapper.Map<Root>(rootDto));
+                mRootRepository.Update(Mapper.Map<Root>(rootDto), null);
         }
 
         public async Task<List<RootDto>> QueryRoot(RootDto searchModel)

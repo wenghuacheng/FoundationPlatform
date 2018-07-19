@@ -1,7 +1,7 @@
 {
   "runtimeTarget": {
     "name": ".NETStandard,Version=v2.0/",
-    "signature": "6bad7dff54faae816bf0c40837d57b04bf26aa2f"
+    "signature": "75841330ca22fa7d859e8a9c56898dcd265fbb26"
   },
   "compilationOptions": {},
   "targets": {
@@ -9,7 +9,7 @@
     ".NETStandard,Version=v2.0/": {
       "Repository.Dapper/1.0.0": {
         "dependencies": {
-          "Dapper": "1.50.4",
+          "Dapper": "1.50.5",
           "DapperExtensions.DotnetCore": "1.0.1",
           "Domain.Core": "1.0.0",
           "NETStandard.Library": "2.0.1"
@@ -18,7 +18,7 @@
           "Repository.Dapper.dll": {}
         }
       },
-      "Dapper/1.50.4": {
+      "Dapper/1.50.5": {
         "dependencies": {
           "System.Data.SqlClient": "4.4.0",
           "System.Reflection.Emit.Lightweight": "4.3.0",
@@ -30,7 +30,7 @@
       },
       "DapperExtensions.DotnetCore/1.0.1": {
         "dependencies": {
-          "Dapper": "1.50.4",
+          "Dapper": "1.50.5",
           "Microsoft.CSharp": "4.3.0",
           "NETStandard.Library": "2.0.1",
           "System.Collections": "4.3.0",
@@ -399,12 +399,12 @@
       "serviceable": false,
       "sha512": ""
     },
-    "Dapper/1.50.4": {
+    "Dapper/1.50.5": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-t5DMz+1aEkBcyCgkj+6hJHNsUq3k/d67lVMTNzICEhVjPUI3Gt2kgotSK8S4SpziIbFPphnOEn8M6Q75ED5hRQ==",
-      "path": "dapper/1.50.4",
-      "hashPath": "dapper.1.50.4.nupkg.sha512"
+      "sha512": "sha512-1vPpX7WQmQCIb7rwlGOUoVs/yWZhVKvdhuG7WrJV+V+qsP8btnrrCqVWHENAlJxBAnUw5rhWfmuba9/Egei9MA==",
+      "path": "dapper/1.50.5",
+      "hashPath": "dapper.1.50.5.nupkg.sha512"
     },
     "DapperExtensions.DotnetCore/1.0.1": {
       "type": "package",

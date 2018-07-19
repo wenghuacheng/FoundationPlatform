@@ -11,6 +11,7 @@ using Domain.Core.Dependency;
 using Domain.Core.IRepository;
 using Domain.Core.IRespository;
 using Repository.Dapper;
+using WordRecoder.Application.IApplicationServices;
 using WordRecoder.Infrastructure.Migration;
 using WordRecoder.Infrastructure.Repository;
 using WordRecoder.Presentation.WPF.ViewModels.Main;
@@ -66,13 +67,13 @@ namespace WordRecoder.Presentation.WPF
             var dbConnection = DbConnectionFactory.GetDatabaseMysqlConnection();
             builder.RegisterInstance<DbConnection>(dbConnection);
             //注册单元模式
-            builder.RegisterGeneric(typeof(UnitOfWork<,>)).As(typeof(IDapperUnitOfWork<,>));
+            builder.RegisterType(typeof(UnitOfWork)).AsImplementedInterfaces();
             //注册默认的仓储（泛型类注册）
             builder.RegisterGeneric(typeof(DapperRepositoryBase<>)).As(typeof(IRepository<>));
             #endregion
 
             this.container = builder.Build();
-
+            
             //automapper
             Mapper.Initialize((config) =>
             {

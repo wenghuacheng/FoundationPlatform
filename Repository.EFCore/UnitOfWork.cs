@@ -1,4 +1,5 @@
 ﻿using Domain.Core;
+using Domain.Core.Entities;
 using Domain.Core.IRespository;
 using Microsoft.EntityFrameworkCore;
 using System;

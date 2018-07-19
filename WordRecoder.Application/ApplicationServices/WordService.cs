@@ -24,13 +24,13 @@ namespace WordRecoder.Application.ApplicationServices
             if (word.Id > 0)
             {
                 //update
-                mWordRepository.Update(Mapper.Map<Word>(word));
+                mWordRepository.Update(Mapper.Map<Word>(word), null);
                 HandleWordRootRelation(word.Id, word.RootRelations);
             }
             else
             {
                 //add
-                int id = mWordRepository.InsertAndGetId(Mapper.Map<Word>(word));
+                int id = mWordRepository.InsertAndGetId(Mapper.Map<Word>(word),null);
                 HandleWordRootRelation(id, word.RootRelations);
             }
         }
