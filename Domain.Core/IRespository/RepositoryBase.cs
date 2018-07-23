@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Domain.Core.IRespository
 {
-    public abstract class RepositoryBase<TEntity, TPrimaryKey> : IRepository<TEntity, TPrimaryKey>, IUnitOfWorkRepository where TEntity : class, IEntity<TPrimaryKey>
+    public abstract class RepositoryBase<TEntity, TPrimaryKey> : IRepository<TEntity, TPrimaryKey>, IUnitOfWorkRepository<TEntity, TPrimaryKey> where TEntity : class, IEntity<TPrimaryKey>
     {
         public RepositoryBase()
         {
@@ -192,6 +192,21 @@ namespace Domain.Core.IRespository
         public void PersistUpdate(IEntity entity, IDbTransaction transaction)
         {
             this.Update(entity as TEntity, transaction);
+        }
+
+        public void PersistAdd(TEntity entity, IDbTransaction transaction = null)
+        {
+            this.Insert(entity, transaction);
+        }
+
+        public void PersistRemove(TEntity entity, IDbTransaction transaction = null)
+        {
+            this.Delete(entity, transaction);
+        }
+
+        public void PersistUpdate(TEntity entity, IDbTransaction transaction = null)
+        {
+            this.Update(entity, transaction);
         }
         #endregion
 

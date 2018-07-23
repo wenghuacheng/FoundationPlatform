@@ -73,7 +73,10 @@ namespace WordRecoder.Presentation.WPF
             #endregion
 
             this.container = builder.Build();
-            
+
+            var service1 = container.Resolve<IRootSerivce>();
+            var service2 = container.Resolve<ITestService>();
+
             //automapper
             Mapper.Initialize((config) =>
             {

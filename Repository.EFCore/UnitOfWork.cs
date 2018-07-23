@@ -46,5 +46,10 @@ namespace Repository.EFCore
             return repositoryInstance;
 
         }
+
+        public IUnitOfWorkRepository<TEntity, TPrimaryKey> UnitOfWorkRepository<TEntity, TPrimaryKey>() where TEntity : class, IEntity<TPrimaryKey>
+        {
+            return Repository<TEntity, TPrimaryKey>() as IUnitOfWorkRepository<TEntity, TPrimaryKey>;
+        }
     }
 }

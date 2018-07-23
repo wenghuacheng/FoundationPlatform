@@ -19,6 +19,9 @@ namespace Domain.Core
 
         IRepository<TEntity, TPrimaryKey> Repository<TEntity, TPrimaryKey>() where TEntity : class, IEntity<TPrimaryKey>;
 
+        IUnitOfWorkRepository<TEntity, TPrimaryKey> UnitOfWorkRepository<TEntity, TPrimaryKey>() where TEntity : class, IEntity<TPrimaryKey>;
+
+
         void SaveChange();
     }
 }
