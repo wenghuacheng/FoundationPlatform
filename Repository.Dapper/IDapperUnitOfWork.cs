@@ -9,6 +9,6 @@ namespace Repository.Dapper
 {
     public interface IDapperUnitOfWork : IUnitOfWork
     {
-        DbConnection Connection { get; }
+        IDbConnection Connection { get; }
     }
 }

@@ -8,6 +8,7 @@ using System.Text;
 using Dapper;
 using System.Transactions;
 using Domain.Core.Entities;
+using Domain.Core.IRepository;
 
 namespace Repository.Dapper
 {
@@ -19,12 +20,12 @@ namespace Repository.Dapper
 
         private readonly Dictionary<string, object> repositories = new Dictionary<string, object>();
 
-        public UnitOfWork(DbConnection connection)
+        public UnitOfWork(IDbConnectionProvider provider)
         {
-            this.Connection = connection;
+            this.Connection = provider.GetConnection();
         }
 
-        public DbConnection Connection { get; private set; }
+        public IDbConnection Connection { get; private set; }
 
 
         public void RegisterNew(IEntity entity, IUnitOfWorkRepository repository)

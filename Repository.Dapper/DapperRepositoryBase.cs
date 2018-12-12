@@ -10,6 +10,7 @@ using Domain.Core;
 using Domain.Core.IRespository;
 using Repository.Dapper.Expressions;
 using System.Data;
+using System.Diagnostics;
 
 namespace Repository.Dapper
 {
@@ -26,7 +27,7 @@ namespace Repository.Dapper
         #region Connection
         public virtual DbConnection Connection
         {
-            get { return _unitOfWork.Connection; }
+            get { return (DbConnection)_unitOfWork.Connection; }
         }
 
         #endregion
@@ -79,13 +80,24 @@ namespace Repository.Dapper
         public override IEnumerable<TEntity> GetAllPaged(Expression<Func<TEntity, bool>> predicate, int pageNumber, int itemsPerPage, string sortingProperty, bool ascending = true)
         {
             var predicateGroup = predicate.ToPredicateGroup<TEntity, TPrimaryKey>();
-            return Connection.GetPage<TEntity>(predicateGroup, null, pageNumber, itemsPerPage);
+            return Connection.GetPage<TEntity>(predicateGroup, new List<ISort>() { new Sort { PropertyName = sortingProperty, Ascending = ascending } }, pageNumber, itemsPerPage);
         }
 
         public override IEnumerable<TEntity> GetAllPaged(Expression<Func<TEntity, bool>> predicate, int pageNumber, int itemsPerPage, bool ascending = true, params Expression<Func<TEntity, object>>[] sortingExpression)
         {
+            List<ISort> sorts = new List<ISort>();
+            foreach (var item in sortingExpression)
+            {
+                //获取表达式树p=>p.Id中的Id
+                var expression = item.Body as UnaryExpression;
+                var member = expression.Operand as MemberExpression;
+
+                sorts.Add(new Sort() { PropertyName = member.Member.Name, Ascending = ascending });
+                Debug.WriteLine(item.Name);
+            }
+
             var predicateGroup = predicate.ToPredicateGroup<TEntity, TPrimaryKey>();
-            return Connection.GetPage<TEntity>(predicateGroup, null, pageNumber, itemsPerPage);
+            return Connection.GetPage<TEntity>(predicateGroup, sorts, pageNumber, itemsPerPage);
         }
 
 

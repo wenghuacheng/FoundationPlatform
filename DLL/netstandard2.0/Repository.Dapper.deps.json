@@ -402,21 +402,21 @@
     "Dapper/1.50.5": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-1vPpX7WQmQCIb7rwlGOUoVs/yWZhVKvdhuG7WrJV+V+qsP8btnrrCqVWHENAlJxBAnUw5rhWfmuba9/Egei9MA==",
+      "sha512": "sha512-AzAdZ9fEzUtav3Sbc5CMgz5O2oYkc5g1r+g1h/Vn+wqcInII+xtNEfyZryeW90Wq72bxjEBJhe18j+2SrGrc5A==",
       "path": "dapper/1.50.5",
       "hashPath": "dapper.1.50.5.nupkg.sha512"
     },
     "DapperExtensions.DotnetCore/1.0.1": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-owabAX9m4fPaOFea8lFRmhrVQIfRjzE2q26urfLroRdrTkn52yiUXHtJXqOeFHlcwwvb/Y1akEVDtVNBLNO0Pg==",
+      "sha512": "sha512-QsxANFHU+K5XjvqxMLD4L75ROsJpq7giDJk0bLoVfKWa2pWZ8dS/1FSVsCKLsYL4LG8bquV6z38p7iG9au/Zuw==",
       "path": "dapperextensions.dotnetcore/1.0.1",
       "hashPath": "dapperextensions.dotnetcore.1.0.1.nupkg.sha512"
     },
     "Microsoft.CSharp/4.3.0": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-43rMVdmm84is0fiiph9C/Ptf+c8ndGlTJsfd1wejqY0zY+no7W7m5NsJLDOqhJL6xHqfldw/oMNJeo47oU9vyg==",
+      "sha512": "sha512-P+MBhIM0YX+JqROuf7i306ZLJEjQYA9uUyRDE+OqwUI5sh41e2ZbPQV3LfAPh+29cmceE1pUffXsGfR4eMY3KA==",
       "path": "microsoft.csharp/4.3.0",
       "hashPath": "microsoft.csharp.4.3.0.nupkg.sha512"
     },
@@ -430,7 +430,7 @@
     "Microsoft.NETCore.Targets/1.1.0": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-GUWshUIM/Wpf9tHxTBrUECVrDgB8eBtxL05llEnxg/Xctpr9rySZYweBoVko5Ygko4fjjOO50LLiZL/ghSgZZA==",
+      "sha512": "sha512-aOZA3BWfz9RXjpzt0sRJJMjAscAUm3Hoa4UWAfceV9UTYxgwZ1lZt5nO2myFf+/jetYQo4uTP7zS8sJY67BBxg==",
       "path": "microsoft.netcore.targets/1.1.0",
       "hashPath": "microsoft.netcore.targets.1.1.0.nupkg.sha512"
     },
@@ -514,7 +514,7 @@
     "System.Dynamic.Runtime/4.3.0": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-BfN9DFmknLNiyx44mSh456hT6Xopy5dwK+BtZ/WBSLI+EgkXBcPWeakcoQ+35j/Mc0ux4x2g5T5xrKW3oTH5AQ==",
+      "sha512": "sha512-SNVi1E/vfWUAs/WYKhE9+qlS6KqK0YVhnlT0HQtr8pMIA8YX3lwy3uPMownDwdYISBdmAF/2holEIldVp85Wag==",
       "path": "system.dynamic.runtime/4.3.0",
       "hashPath": "system.dynamic.runtime.4.3.0.nupkg.sha512"
     },
@@ -563,21 +563,21 @@
     "System.Reflection.Emit/4.3.0": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-Ll/XWQFtcUGhy0+c0YRLEqUQrYvfe+kMCtT7RsEO9beWB+AnLbQ72b3Y+0Pip4YOuTC/rFJhj1hfPe4CR1whog==",
+      "sha512": "sha512-228FG0jLcIwTVJyz8CLFKueVqQK36ANazUManGaJHkO0icjiIypKW7YLWLIWahyIkdh5M7mV2dJepllLyA1SKg==",
       "path": "system.reflection.emit/4.3.0",
       "hashPath": "system.reflection.emit.4.3.0.nupkg.sha512"
     },
     "System.Reflection.Emit.ILGeneration/4.3.0": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-+0IviBvGbDoLdSwJrMwzpzH93xJlX0JNrDthC7yPsy8baDcUzY4Nhxq4v295jhSFNxjVogKJwGKjTWCQ63SgsA==",
+      "sha512": "sha512-59tBslAk9733NXLrUJrwNZEzbMAcu8k344OYo+wfSVygcgZ9lgBdGIzH/nrg3LYhXceynyvTc8t5/GD4Ri0/ng==",
       "path": "system.reflection.emit.ilgeneration/4.3.0",
       "hashPath": "system.reflection.emit.ilgeneration.4.3.0.nupkg.sha512"
     },
     "System.Reflection.Emit.Lightweight/4.3.0": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-FsaK4GnKK8RM7Yut0mVX+62PQvGpFOcTiNJCkYNY13It143rxGe6IuHg4mqTVI7HPKxbR1LbPZlfpfMs3Q/KSQ==",
+      "sha512": "sha512-oadVHGSMsTmZsAF864QYN1t1QzZjIcuKU3l2S9cZOwDdDueNTrqq1yRj7koFfIGEnKpt6NjpL3rOzRhs4ryOgA==",
       "path": "system.reflection.emit.lightweight/4.3.0",
       "hashPath": "system.reflection.emit.lightweight.4.3.0.nupkg.sha512"
     },
@@ -598,7 +598,7 @@
     "System.Reflection.TypeExtensions/4.4.0": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-dkmh/ySlwnXJp/1qYP9uyKkCK1CXR/REFzl7abHcArxBcV91mY2CgrrzSRA5Z/X4MevJWwXsklGRdR3A7K9zbg==",
+      "sha512": "sha512-JRxOAH6by+wn1gNnZc9jf2HbO/szhMJuLY2w44nEW77354WntXlFzWSVkx6280Uvcl3URZ/At+444vjX0/X1Aw==",
       "path": "system.reflection.typeextensions/4.4.0",
       "hashPath": "system.reflection.typeextensions.4.4.0.nupkg.sha512"
     },

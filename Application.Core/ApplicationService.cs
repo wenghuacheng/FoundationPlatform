@@ -5,6 +5,8 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Linq;
+using System.Linq.Expressions;
+using System.Diagnostics;
 
 namespace Application.Core
 {
@@ -21,17 +23,17 @@ namespace Application.Core
 
 
         #region 基础操作
-        public virtual bool Create<TDto>(TDto model)
+        public virtual TDto Create<TDto>(TDto model)
         {
             try
             {
                 var item = Mapper.Map<TDto, TEntity>(model);
                 mRepository.Insert(item, null);
-                return true;
+                return Mapper.Map<TEntity, TDto>(item);
             }
             catch (Exception ex)
             {
-                return false;
+                return default(TDto);
             }
         }
 
@@ -58,17 +60,17 @@ namespace Application.Core
         /// </summary>
         /// <param name="memberType"></param>
         /// <returns></returns>
-        public virtual bool Update<TDto>(TDto model)
+        public virtual TDto Update<TDto>(TDto model)
         {
             try
             {
                 var item = Mapper.Map<TEntity>(model);
                 mRepository.Update(item, null);
-                return true;
+                return Mapper.Map<TEntity, TDto>(item);
             }
             catch (Exception ex)
             {
-                return false;
+                return default(TDto);
             }
         }
 
@@ -80,10 +82,10 @@ namespace Application.Core
         {
             try
             {
-                var items = mRepository.GetAll().Select(p => Mapper.Map<TDto>(p));
-                return items.ToList();
+                var items = mRepository.GetAll().ToList();
+                return items.Select(p => Mapper.Map<TDto>(p)).ToList();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 return new List<TDto>();
             }
@@ -97,17 +99,48 @@ namespace Application.Core
         {
             try
             {
-                var item = mRepository.FirstOrDefault(p => p.Id.Equals(key));
+                var item = mRepository.Get(key);
                 if (item != null)
                     return Mapper.Map<TDto>(item);
                 else
                     return default(TDto);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 return default(TDto);
             }
         }
+
+        /// <summary>
+        /// 分页查询
+        /// </summary>
+        /// <typeparam name="TDto"></typeparam>
+        /// <param name="predicate"></param>
+        /// <param name="pageIndex"></param>
+        /// <param name="pageSize"></param>
+        /// <returns></returns>
+        public virtual List<TDto> Query<TDto>(Expression<Func<TEntity, bool>> predicate, int pageIndex, int pageSize)
+        {
+            List<TDto> result = new List<TDto>();
+
+            try
+            {
+                var list = this.mRepository.GetAllPaged(predicate, pageIndex, pageSize, sortingExpression: p => p.Id);
+                foreach (var item in list)
+                {
+                    var member = Mapper.Map<TDto>(item);
+                    result.Add(member);
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+            }
+
+            return result;
+        }
+
+
         #endregion
     }
 }

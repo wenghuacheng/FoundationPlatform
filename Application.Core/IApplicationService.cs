@@ -2,6 +2,7 @@
 using Domain.Core.Dependency;
 using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 using System.Text;
 
 namespace Application.Core
@@ -11,14 +12,16 @@ namespace Application.Core
     /// </summary>
     public interface IApplicationService<TEntity, TPrimaryKey> : ITransientDependency where TEntity : class, IEntity<TPrimaryKey>, new()
     {
-        bool Create<TDto>(TDto model);
+        TDto Create<TDto>(TDto model);
 
         bool Delete(TPrimaryKey id);
 
-        bool Update<TDto>(TDto model);
+        TDto Update<TDto>(TDto model);
 
         List<TDto> Get<TDto>();
 
         TDto Get<TDto>(TPrimaryKey key);
+
+        List<TDto> Query<TDto>(Expression<Func<TEntity, bool>> predicate, int pageIndex, int pageSize);
     }
 }

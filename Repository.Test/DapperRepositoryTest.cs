@@ -16,7 +16,7 @@ namespace Repository.Test
         {
             var connection = new MySql.Data.MySqlClient.MySqlConnection("server=localhost;user id=root;password=123456;database=Test");
 
-            unitOfWork = new UnitOfWork(connection);
+            unitOfWork = new UnitOfWork(null);
             repository = new DapperRepositoryBase<Test, int>(unitOfWork);
         }
 
@@ -94,7 +94,7 @@ namespace Repository.Test
         [TestMethod]
         public void Dapper_GetAllPaged_Test()
         {
-            var items = repository.GetAllPaged(p => p.Id >= 0, 1, 10);
+            var items = repository.GetAllPaged(p => p.Id >= 0, 1, 10, sortingExpression: p => p.Id);
             Assert.IsNotNull(items);
             Assert.AreNotEqual<int>(items.Count(), 0);
         }
